@@ -1,0 +1,110 @@
+//Exercício 1
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Quanto é o valor você deseja investir?");
+        decimal valorinicial = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual é a taxa de juros que você deseja aplicar?");
+        decimal taxajuros = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual a quantidade de meses que você deixará rendendo?");
+        int numerodemeses = int.Parse(Console.ReadLine());
+        decimal percentualjuros = (taxajuros / 100)+1;
+        decimal quadradojuros = 1;
+        for (int i = 0; i < numerodemeses; i++)
+        {
+           quadradojuros = quadradojuros * percentualjuros;
+        }
+        decimal valorfinal = valorinicial * quadradojuros;
+        Console.WriteLine($"Valor Inicial: {valorinicial:F2}R$");
+        Console.WriteLine($"Taxa Mensal Atribuída: {taxajuros:F2}%");
+        Console.WriteLine($"Quantidade de meses rendendo: {numerodemeses:F2} meses");
+        Console.WriteLine($"O valor final da sua aplicação é:{valorfinal:F2}R$");
+    }
+}
+
+//Exercício 2
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Quanto é o valor você deseja investir?");
+        decimal valorinicial = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual é a taxa de juros que você deseja aplicar?");
+        decimal taxajuros = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual a quantidade de meses que você deixará rendendo?");
+        int numerodemeses = int.Parse(Console.ReadLine());
+        decimal percentualjuros = (taxajuros / 100)+1;
+        decimal quadradojuros = 1;
+        decimal rendaacumulada = valorinicial;
+        for (int i = 1; i <= numerodemeses; i++)
+        {
+           quadradojuros = quadradojuros * percentualjuros;
+           decimal rendamensal = (quadradojuros * valorinicial) - valorinicial;
+           rendaacumulada = rendamensal + rendaacumulada;
+           Console.WriteLine($"Sua renda no mes {i} foi: {rendamensal:F2}R$");
+            Console.WriteLine($"Sua renda acumulada no mes {i} foi: {rendaacumulada:F2}R$");
+        }
+        decimal valorfinal = valorinicial * quadradojuros;
+        Console.WriteLine($"O valor final da sua aplicação é:{valorfinal:F2}R$");
+    }
+}
+//Exercício 3
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Quanto é o valor você deseja investir?");
+        decimal valorinicial = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual é a taxa de juros que você deseja aplicar?");
+        decimal taxajuros = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual a quantidade de anos que você deixará rendendo?");
+        int numerodeanos = int.Parse(Console.ReadLine());
+        decimal percentualjuros = (taxajuros / 100)+1;
+        decimal quadradojuros = 1;
+        for (int i = 1; i <= numerodeanos; i++)
+        {
+           quadradojuros = quadradojuros * percentualjuros;
+        }
+        decimal valorfinal = valorinicial * quadradojuros;
+        Console.WriteLine($"O valor final da sua aplicação é:{valorfinal:F2}R$");
+    }
+}
+//Exercício 4
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Quanto é o valor você deseja investir?");
+        decimal valorinicial = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual é a taxa de juros que você deseja aplicar?");
+        decimal taxajuros = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Qual a quantidade de meses que você deixará rendendo?");
+        int numerodemeses = int.Parse(Console.ReadLine());
+        decimal percentualjuros = (taxajuros / 100)+1;
+        decimal quadradojuros = 1;
+        decimal valorfinal = 0;
+        for (int i = 1; i <= numerodemeses; i++)
+        {
+           quadradojuros = quadradojuros * percentualjuros;
+            Console.WriteLine($"Estamos no mês {i} deseja Sacar uma quantidade de dinheiro?");
+            string escolha = Console.ReadLine();
+           if(escolha=="Sim" )
+            {
+                Console.WriteLine("Qual o valor que deseja sacar?");
+                decimal saque = decimal.Parse(Console.ReadLine());
+                valorfinal = valorinicial * quadradojuros;
+                valorfinal = valorfinal - saque;
+                quadradojuros = 1;
+            }
+        }
+        valorfinal = valorfinal * quadradojuros;
+        Console.WriteLine($"O valor final da sua aplicação é:{valorfinal:F2}R$");
+    }
+}
+//Exercício 5
+
+Valor Inicial = R$ 5.132,37
+Taxa Juros = 20% 
+Tempo = 2 anos
+Valor Final (R$ 7.390,61) = 5.132,37 * (1+0.2)^2
