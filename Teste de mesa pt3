@@ -1,0 +1,97 @@
+//Exercicio 1
+using System.Security.Cryptography.X509Certificates;
+namespace resenha 
+{ 
+    class Investimento
+    {
+        static void Main()
+        {
+            decimal[] valorinicial = new decimal[3];
+            decimal[] taxajuros = new decimal[3];
+            decimal[] valorfinal = new decimal[3];
+            double[] meses = new double[3];
+            double[] dias = new double[3];
+            int contvalor = 0;
+            int contjuros = 0;
+            int contdias = 0;
+            while (true)
+            {
+                Console.WriteLine("Olá, você deseja adicionar qual tipo de entrada?\n\n>1- Valor Presente." +
+                    "       >2- Taxa de Juros.       >3-Número de dias.       >4-Realizar os Calculos.");
+                int escolha = int.Parse(Console.ReadLine());
+                if (escolha == 1)
+                {
+                    Console.WriteLine("Qual o valor presente que voce deseja adicionar?");
+                    valorinicial[contvalor] = decimal.Parse(Console.ReadLine());
+                    contvalor++;
+                }
+                else if (escolha == 2)
+                {
+                    Console.WriteLine("Qual a taxa dos juros que voce deseja adicionar?");
+                    taxajuros[contjuros] = decimal.Parse(Console.ReadLine());
+                    contjuros++;
+                }
+                else if (escolha == 3)
+                {
+                    Console.WriteLine("Qual a quantidade de dias que voce quer adicionar?");
+                    dias[contdias] = double.Parse(Console.ReadLine());
+                    contdias++;
+
+                }
+                else if (escolha == 4) 
+                {
+                   Console.WriteLine($"Com qual das quantidades de meses você deseja fazer a simulação?\n\n>" +
+                       $"{dias[0]} dias.       >{dias[1]} dias.       >{dias[2]} dias.");
+                   int escolha2 = int.Parse(Console.ReadLine());
+                   if(escolha2 == 1)
+                    {
+                       valorfinal[0] = CalcularInvestimento(valorinicial[0], taxajuros[0], dias[0]);
+                       valorfinal[1] = CalcularInvestimento(valorinicial[1], taxajuros[1], dias[0]);
+                       valorfinal[2] = CalcularInvestimento(valorinicial[2], taxajuros[2], dias[0]);
+                       MostrarValores(valorfinal[0], valorinicial[0], meses[0], dias[0], taxajuros[0]);
+                       MostrarValores(valorfinal[1], valorinicial[1], meses[0], dias[0], taxajuros[1]);
+                       MostrarValores(valorfinal[2], valorinicial[2], meses[0], dias[0], taxajuros[2]);
+                    }
+                   if(escolha2 == 2)
+                    {
+                        valorfinal[0] = CalcularInvestimento(valorinicial[0], taxajuros[0], dias[1]);
+                        valorfinal[1] = CalcularInvestimento(valorinicial[1], taxajuros[1], dias[1]);
+                        valorfinal[2] = CalcularInvestimento(valorinicial[2], taxajuros[2], dias[1]);
+                        MostrarValores(valorfinal[0], valorinicial[0], meses[1], dias[1], taxajuros[0]);
+                        MostrarValores(valorfinal[1], valorinicial[1], meses[1], dias[1], taxajuros[1]);
+                        MostrarValores(valorfinal[2], valorinicial[2], meses[1], dias[1], taxajuros[2]);
+                    }
+                   if(escolha2 == 3)
+                    {
+                        valorfinal[0] = CalcularInvestimento(valorinicial[0], taxajuros[0], dias[2]);
+                        valorfinal[1] = CalcularInvestimento(valorinicial[1], taxajuros[1], dias[2]);
+                        valorfinal[2] = CalcularInvestimento(valorinicial[2], taxajuros[2], dias[2]);
+                        MostrarValores(valorfinal[0], valorinicial[0], meses[2], dias[2], taxajuros[0]);
+                        MostrarValores(valorfinal[1], valorinicial[1], meses[2], dias[2], taxajuros[1]);
+                        MostrarValores(valorfinal[2], valorinicial[2], meses[2], dias[2], taxajuros[2]);
+                    }
+                   
+                }
+            }
+        }
+        static decimal CalcularInvestimento(decimal valorinicial, decimal taxajuros, double dias)
+        {
+            taxajuros = (taxajuros / 100);
+            taxajuros = (taxajuros / 30)+1; 
+            decimal quadradojuros = 1;
+            for (int i = 0; i < dias; i++)
+            {
+                quadradojuros = quadradojuros * taxajuros;
+            }
+            decimal valorfinal = valorinicial * quadradojuros;
+            return valorfinal;
+        }
+        static void MostrarValores(decimal valorfinal, decimal valorinicial, double meses, double dias, decimal juros)
+        {
+            Console.WriteLine($"Valor Inicial: {valorinicial:F2}R$\\n");
+            Console.WriteLine($"Taxa de Juros: {juros:F2}%\\n");
+            Console.WriteLine($"Quantidade de dias investidos: {meses} meses e {dias} dias.");
+            Console.WriteLine($"Valor final do investimento: {valorfinal:F2}R$");
+        }
+    }
+}
