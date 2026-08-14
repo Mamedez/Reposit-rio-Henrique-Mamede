@@ -7,6 +7,7 @@ namespace resenha
         static void Main()
         {
             decimal[] valorinicial = new decimal[3];
+            int[] idinvestimento = new int[3];
             decimal[] taxajuros = new decimal[3];
             decimal[] valorfinal = new decimal[3];
             double[] meses = new double[3];
@@ -23,6 +24,7 @@ namespace resenha
                 {
                     Console.WriteLine("Qual o valor presente que voce deseja adicionar?");
                     valorinicial[contvalor] = decimal.Parse(Console.ReadLine());
+                    idinvestimento[contvalor] = contvalor + 1;
                     contvalor++;
                 }
                 else if (escolha == 2)
@@ -35,12 +37,13 @@ namespace resenha
                 {
                     Console.WriteLine("Qual a quantidade de dias que voce quer adicionar?");
                     dias[contdias] = double.Parse(Console.ReadLine());
+                    meses[contdias] = dias[contdias] / 30;
                     contdias++;
 
                 }
                 else if (escolha == 4) 
                 {
-                   Console.WriteLine($"Com qual das quantidades de meses você deseja fazer a simulação?\n\n>" +
+                   Console.WriteLine($"Com qual das quantidades de dias que você deseja fazer a simulação?\n\n>" +
                        $"{dias[0]} dias.       >{dias[1]} dias.       >{dias[2]} dias.");
                    int escolha2 = int.Parse(Console.ReadLine());
                    if(escolha2 == 1)
@@ -48,8 +51,11 @@ namespace resenha
                        valorfinal[0] = CalcularInvestimento(valorinicial[0], taxajuros[0], dias[0]);
                        valorfinal[1] = CalcularInvestimento(valorinicial[1], taxajuros[1], dias[0]);
                        valorfinal[2] = CalcularInvestimento(valorinicial[2], taxajuros[2], dias[0]);
+                       SeparacaoInvestimento(idinvestimento[0]);
                        MostrarValores(valorfinal[0], valorinicial[0], meses[0], dias[0], taxajuros[0]);
+                       SeparacaoInvestimento(idinvestimento[1]);
                        MostrarValores(valorfinal[1], valorinicial[1], meses[0], dias[0], taxajuros[1]);
+                       SeparacaoInvestimento(idinvestimento[2]);
                        MostrarValores(valorfinal[2], valorinicial[2], meses[0], dias[0], taxajuros[2]);
                     }
                    if(escolha2 == 2)
@@ -57,8 +63,11 @@ namespace resenha
                         valorfinal[0] = CalcularInvestimento(valorinicial[0], taxajuros[0], dias[1]);
                         valorfinal[1] = CalcularInvestimento(valorinicial[1], taxajuros[1], dias[1]);
                         valorfinal[2] = CalcularInvestimento(valorinicial[2], taxajuros[2], dias[1]);
+                        SeparacaoInvestimento(idinvestimento[0]);
                         MostrarValores(valorfinal[0], valorinicial[0], meses[1], dias[1], taxajuros[0]);
+                        SeparacaoInvestimento(idinvestimento[1]);
                         MostrarValores(valorfinal[1], valorinicial[1], meses[1], dias[1], taxajuros[1]);
+                        SeparacaoInvestimento(idinvestimento[2]);
                         MostrarValores(valorfinal[2], valorinicial[2], meses[1], dias[1], taxajuros[2]);
                     }
                    if(escolha2 == 3)
@@ -66,8 +75,11 @@ namespace resenha
                         valorfinal[0] = CalcularInvestimento(valorinicial[0], taxajuros[0], dias[2]);
                         valorfinal[1] = CalcularInvestimento(valorinicial[1], taxajuros[1], dias[2]);
                         valorfinal[2] = CalcularInvestimento(valorinicial[2], taxajuros[2], dias[2]);
+                        SeparacaoInvestimento(idinvestimento[0]);
                         MostrarValores(valorfinal[0], valorinicial[0], meses[2], dias[2], taxajuros[0]);
+                        SeparacaoInvestimento(idinvestimento[1]);
                         MostrarValores(valorfinal[1], valorinicial[1], meses[2], dias[2], taxajuros[1]);
+                        SeparacaoInvestimento(idinvestimento[2]);
                         MostrarValores(valorfinal[2], valorinicial[2], meses[2], dias[2], taxajuros[2]);
                     }
                    
@@ -88,10 +100,263 @@ namespace resenha
         }
         static void MostrarValores(decimal valorfinal, decimal valorinicial, double meses, double dias, decimal juros)
         {
-            Console.WriteLine($"Valor Inicial: {valorinicial:F2}R$\\n");
-            Console.WriteLine($"Taxa de Juros: {juros:F2}%\\n");
-            Console.WriteLine($"Quantidade de dias investidos: {meses} meses e {dias} dias.");
+            Console.WriteLine($"Valor Inicial: {valorinicial:F2}R$");
+            Console.WriteLine($"Taxa de Juros: {juros:F2}%");
+            dias = dias % 30;
+            Console.WriteLine($"Quantidade de dias investidos: {meses:F0} meses e {dias} dias.");
             Console.WriteLine($"Valor final do investimento: {valorfinal:F2}R$");
+        }
+        static void SeparacaoInvestimento(int idinvestimento)
+        {
+            Console.WriteLine($"======================= Investimento {idinvestimento} =======================");
+        }
+    }
+}
+
+
+//exercicio 2
+using System.Security.Cryptography.X509Certificates;
+namespace resenha 
+{ 
+    class Investimento
+    {
+        static void Main()
+        {
+            decimal[] valorinicial = new decimal[3];
+            int[] idinvestimento = new int[3];
+            decimal[] taxajuros = new decimal[3];
+            decimal[] valorfinal = new decimal[3];
+            decimal[] resgate = new decimal[3];
+            double[] meses = new double[3];
+            double[] dias = new double[3];
+            int contvalor = 0;
+            int contjuros = 0;
+            int contdias = 0;
+            while (true)
+            {
+                Console.WriteLine("Olá, você deseja adicionar qual tipo de entrada?\n\n>1- Valor Presente." +
+                    "       >2- Taxa de Juros.       >3-Número de dias.       >4-Realizar os Calculos.");
+                int escolha = int.Parse(Console.ReadLine());
+                if (escolha == 1)
+                {
+                    Console.WriteLine("Qual o valor presente que voce deseja adicionar?");
+                    valorinicial[contvalor] = decimal.Parse(Console.ReadLine());
+                    idinvestimento[contvalor] = contvalor + 1;
+                    contvalor++;
+                }
+                else if (escolha == 2)
+                {
+                    Console.WriteLine("Qual a taxa dos juros que voce deseja adicionar?");
+                    taxajuros[contjuros] = decimal.Parse(Console.ReadLine());
+                    contjuros++;
+                }
+                else if (escolha == 3)
+                {
+                    Console.WriteLine("Qual a quantidade de dias que voce quer adicionar?");
+                    dias[contdias] = double.Parse(Console.ReadLine());
+                    meses[contdias] = dias[contdias] / 30;
+                    contdias++;
+
+                }
+                else if (escolha == 4) 
+                {
+                   Console.WriteLine($"Com qual das quantidades de dias que você deseja fazer a simulação?\n\n>" +
+                       $"{dias[0]} dias.       >{dias[1]} dias.       >{dias[2]} dias.");
+                   int escolha2 = int.Parse(Console.ReadLine());
+                   if(escolha2 == 1)
+                    {
+                       var resultado1 = CalcularInvestimento(idinvestimento[0], valorinicial[0], taxajuros[0], dias[0]);
+                       valorfinal[0] = resultado1.valorfinal;
+                       resgate[0] = resultado1.resgate;
+                       var resultado2 = CalcularInvestimento(idinvestimento[1], valorinicial[1], taxajuros[1], dias[1]);
+                       valorfinal[1] = resultado1.valorfinal;
+                       resgate[1] = resultado1.resgate;
+                       var resultado3 = CalcularInvestimento(idinvestimento[2], valorinicial[2], taxajuros[2], dias[2]);
+                       valorfinal[2] = resultado1.valorfinal;
+                       resgate[2] = resultado1.resgate;
+                       SeparacaoInvestimento(idinvestimento[0]);
+                       MostrarValores(valorfinal[0], valorinicial[0], meses[0], dias[0], taxajuros[0], resgate[0]);
+                       SeparacaoInvestimento(idinvestimento[1]);
+                       MostrarValores(valorfinal[1], valorinicial[1], meses[0], dias[0], taxajuros[1], resgate[1]);
+                       SeparacaoInvestimento(idinvestimento[2]);
+                       MostrarValores(valorfinal[2], valorinicial[2], meses[0], dias[0], taxajuros[2], resgate[2]);
+                    }
+                   if(escolha2 == 2)
+                    {
+                        var resultado1 = CalcularInvestimento(idinvestimento[0], valorinicial[0], taxajuros[0], dias[1]);
+                        valorfinal[0] = resultado1.valorfinal;
+                        resgate[0] = resultado1.resgate;
+                        var resultado2 = CalcularInvestimento(idinvestimento[1], valorinicial[1], taxajuros[1], dias[1]);
+                        valorfinal[1] = resultado1.valorfinal;
+                        resgate[1] = resultado1.resgate;
+                        var resultado3 = CalcularInvestimento(idinvestimento[2], valorinicial[2], taxajuros[2], dias[1]);
+                        valorfinal[2] = resultado1.valorfinal;
+                        resgate[2] = resultado1.resgate;
+                        SeparacaoInvestimento(idinvestimento[0]);
+                        MostrarValores(valorfinal[0], valorinicial[0], meses[1], dias[1], taxajuros[0], resgate[0]);
+                        SeparacaoInvestimento(idinvestimento[1]);
+                        MostrarValores(valorfinal[1], valorinicial[1], meses[1], dias[1], taxajuros[1], resgate[1]);
+                        SeparacaoInvestimento(idinvestimento[2]);
+                        MostrarValores(valorfinal[2], valorinicial[2], meses[1], dias[1], taxajuros[2], resgate[2]);
+                    }
+                   if(escolha2 == 3)
+                    {
+                        var resultado1 = CalcularInvestimento(idinvestimento[0], valorinicial[0], taxajuros[0], dias[2]);
+                        valorfinal[0] = resultado1.valorfinal;
+                        resgate[0] = resultado1.resgate;
+                        var resultado2 = CalcularInvestimento(idinvestimento[1], valorinicial[1], taxajuros[1], dias[2]);
+                        valorfinal[1] = resultado1.valorfinal;
+                        resgate[1] = resultado1.resgate;
+                        var resultado3 = CalcularInvestimento(idinvestimento[2], valorinicial[2], taxajuros[2], dias[2]);
+                        valorfinal[2] = resultado1.valorfinal;
+                        resgate[2] = resultado1.resgate;
+                        SeparacaoInvestimento(idinvestimento[0]);
+                        MostrarValores(valorfinal[0], valorinicial[0], meses[2], dias[2], taxajuros[0], resgate[0]);
+                        SeparacaoInvestimento(idinvestimento[1]);
+                        MostrarValores(valorfinal[1], valorinicial[1], meses[2], dias[2], taxajuros[1], resgate[1]);
+                        SeparacaoInvestimento(idinvestimento[2]);
+                        MostrarValores(valorfinal[2], valorinicial[2], meses[2], dias[2], taxajuros[2], resgate[2]);
+                    }
+                   
+                }
+            }
+        }
+        static (decimal valorfinal, decimal resgate) CalcularInvestimento(int idinvestimento, decimal valorinicial, decimal taxajuros, double dias)
+        {
+            taxajuros = (taxajuros / 100);
+            taxajuros = (taxajuros / 30)+1; 
+            decimal valorfinal=valorinicial;
+            decimal resgate=0;
+            for (int i = 0; i < dias; i++)
+            {   
+                valorfinal *= taxajuros;
+                if (i==149)
+                {
+                    Console.WriteLine($"Quanto dinheiro voce deseja resgatar do investimento {idinvestimento}?");
+                    resgate = decimal.Parse(Console.ReadLine());
+                    valorfinal -= resgate;
+                }
+            }
+            return (valorfinal, resgate);
+        }
+        static void MostrarValores(decimal valorfinal, decimal valorinicial, double meses, double dias, decimal juros, decimal resgate)
+        {
+            Console.WriteLine($"Valor Inicial: {valorinicial:F2}R$");
+            Console.WriteLine($"Taxa de Juros: {juros:F2}%");
+            dias = dias % 30;
+            decimal rendimentoliquido = valorfinal - valorinicial;
+            Console.WriteLine($"Quantidade de dias investidos: {meses:F0} meses e {dias} dias.");
+            Console.WriteLine($"Quantidade de dinheiro resgatada no mês 5 {resgate:F2}");
+            Console.WriteLine($"Valor do Saldo Liquido Restante: {valorfinal:F2}R$");
+            Console.WriteLine($"O Rendimento Liquido foi de: {rendimentoliquido:F2}");
+        }
+        static void SeparacaoInvestimento(int idinvestimento)
+        {
+            Console.WriteLine($"======================= Investimento {idinvestimento} =======================");
+        }
+    }
+}
+//Exercicio 3
+using System.IO.Pipes;
+using System.Security.Cryptography.X509Certificates;
+namespace resenha 
+{ 
+    class Investimento
+    {
+        static void Main()
+        {
+            Console.WriteLine("Quantas entradas de cada variavel você deseja colocar?");
+            int tamanhoentradas = int.Parse(Console.ReadLine());
+            decimal[] valorinicial = new decimal[tamanhoentradas];
+            int[] idinvestimento = new int[tamanhoentradas];
+            decimal[] taxajuros = new decimal[tamanhoentradas];
+            decimal[] valorfinal = new decimal[tamanhoentradas];
+            decimal[] resgate = new decimal[tamanhoentradas];
+            double[] meses = new double[tamanhoentradas];
+            double[] dias = new double[tamanhoentradas];
+            int contvalor = 0;
+            int contjuros = 0;
+            int contdias = 0;
+            while (true)
+            {   
+                Console.WriteLine("Olá, você deseja adicionar qual tipo de entrada?\n\n>1- Valor Presente." +
+                    "       >2- Taxa de Juros.       >3-Número de dias.       >4-Realizar os Calculos.");
+                int escolha = int.Parse(Console.ReadLine());
+                if (escolha == 1)
+                {
+                    Console.WriteLine("Qual o valor presente que voce deseja adicionar?");
+                    valorinicial[contvalor] = decimal.Parse(Console.ReadLine());
+                    idinvestimento[contvalor] = contvalor + 1;
+                    contvalor++;
+                }
+                else if (escolha == 2)
+                {
+                    Console.WriteLine("Qual a taxa dos juros que voce deseja adicionar?");
+                    taxajuros[contjuros] = decimal.Parse(Console.ReadLine());
+                    contjuros++;
+                }
+                else if (escolha == 3)
+                {
+                    Console.WriteLine("Qual a quantidade de dias que voce quer adicionar?");
+                    dias[contdias] = double.Parse(Console.ReadLine());
+                    meses[contdias] = dias[contdias] / 30;
+                    contdias++;
+
+                }
+                else if (escolha == 4) 
+                {
+                    for (int i = 0; i < tamanhoentradas; i++)
+                    {
+                        var resultado1 = CalcularInvestimento(idinvestimento[i], valorinicial[i], taxajuros[i], dias[i]);
+                        valorfinal[i] = resultado1.valorfinal;
+                        resgate[i] = resultado1.resgate;
+                    }
+                    for (int i = 0; i < tamanhoentradas; i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.WriteLine("|  Valor Investido  |  Taxa Juros  |  Rendimento  |  Período (a.m)  |  Resgate  |  Saldo Líquido  |");
+                        }
+                        MostrarTabela(valorfinal[i], valorinicial[i], meses[i], dias[i], taxajuros[i], resgate[i]);
+                    }
+                }
+            }
+        }
+        static (decimal valorfinal, decimal resgate) CalcularInvestimento(int idinvestimento, decimal valorinicial, decimal taxajuros, double dias)
+        {
+            taxajuros = (taxajuros / 100);
+            taxajuros = (taxajuros / 30)+1; 
+            decimal valorfinal=valorinicial;
+            decimal resgate = 0;
+            string resposta = "";
+            int contmes = 0;
+            for (int i = 0; i < dias; i++)
+            {   
+                valorfinal *= taxajuros;
+                if (i%30==0)
+                {
+                    contmes++;
+                    Console.WriteLine($"(Investimento {idinvestimento} )Deseja Retirar um Valor do Investimento no mês {contmes}?");
+                    resposta = Console.ReadLine();
+                    if (resposta == "Sim")
+                    {
+                        Console.WriteLine($"Quanto dinheiro voce deseja resgatar do investimento {idinvestimento}?");
+                        resgate = decimal.Parse(Console.ReadLine());
+                        valorfinal -= resgate;
+                    }
+                }
+            }
+            return (valorfinal, resgate);
+        }
+        static void MostrarTabela(decimal valorfinal, decimal valorinicial, double meses, double dias, decimal juros, decimal resgate)
+        {
+            double anos = meses/12;
+            decimal rendimentoliquido = valorfinal - valorinicial;
+            Console.WriteLine($"|     {valorinicial:F2}R$     |    {juros:F2}%     |   {rendimentoliquido:F2}R$   |    {anos:F1}a ou {meses:F0}m   |    {resgate:F2}R$  |    {valorfinal:F2}R$    |");
+        }
+        static void SeparacaoInvestimento(int idinvestimento)
+        {
+            Console.WriteLine($"======================= Investimento {idinvestimento} =======================");
         }
     }
 }
