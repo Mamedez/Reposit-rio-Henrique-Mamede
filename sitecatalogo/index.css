@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: "FonteRock";
+    src: url(fontes/Midnight\ Legacy.otf);
+}
+@font-face {
+    font-family: "FonteRock2";
+    src: url(fontes/Crimes\ Times\ Six.ttf)
+}
+.top {
+    width: 100%;
+    height: 150px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.logo {
+    font-family: "FonteRock";
+    font-size: 55px;
+    color: black;
+    -webkit-text-stroke: 1px rgb(105, 0, 0);
+}
+.menu {
+    display: flex;
+    gap: 55px;
+    font-family: "FonteRock2";
+}
+.menu a {
+    text-decoration: none;
+    font-size: 55px;
+    color: black;
+    -webkit-text-stroke: 1px rgb(105, 0, 0);
+}
+.menu a:hover {
+    font-size:  65px;
+    color: rgb(105, 0, 0);
+}
+.carrossel {
+    width: 1100px;
+    height: 550px;
+    margin: 200px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 25px;
+    border: 2px solid darkred;
+}
+.carrossel input {
+    display: none;
+}
+.slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.6s ease;
+}
+.slide {
+    width: calc(100% / 3);
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+#slide1:checked ~ .slides {
+    transform: translateX(0);
+}
+
+#slide2:checked ~ .slides {
+    transform: translateX(-33.333%);
+}
+
+#slide3:checked ~ .slides {
+    transform: translateX(-66.666%);
+}
+.setas {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: none;
+    justify-content: space-between;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+.setas label {
+    font-size: 55px;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0 0 10px black;
+    transition: 0.3s;
+}
+.setas label:hover {
+    color: darkred;
+    transform: scale(1.2);
+}
+#slide1:checked ~ .seta1 {
+    display: flex;
+}
+
+#slide2:checked ~ .seta2 {
+    display: flex;
+}
+
+#slide3:checked ~ .seta3 {
+    display: flex;
+}
+.fundocarrossel {
+    width: 100%;
+    padding: 60px 0;
+    background-color: rgba(0,0,0,0.65);
+}
+body {
+background-image:url(img/wallpaperindex.png);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+background-attachment: fixed;
+}
+.banner {
+    width: 100%;
+    height: 350px;
+    background-color: rgba(0,0,0,0.99);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+h2 {
+    font-family: "FonteRock";
+    text-decoration: none;
+    font-size: 100px;
+    color: black;
+    text-align: center;
+    -webkit-text-stroke: 1px rgb(105, 0, 0);
+}
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 90%;
+    margin: 50px auto;
+}
+.produto {
+    background-color: rgba(0, 0, 0,0.65);
+    padding: 5px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.produto:hover {
+    transform: translateY(-5px);
+}
+.produto img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.produto h3 {
+    margin-top: 45px;
+    color: white;
+    -webkit-text-stroke: rgb(105, 0, 0);
+    margin:10px;
+    text-align: center;
+}
+.produto p {
+    margin: 10px 0;
+    color: #ffffff;
+    text-align: center;
+}
+.produto span {
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    display: block;
+    text-align: center;
+}
+.comprar,
+.finalizar {
+    display: block;
+    width: fit-content;
+    padding: 12px 30px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin: 20px auto 0;
+    border: 2px solid darkred;
+}
+.comprar:hover,
+.finalizar:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}
+.rodape {
+    width: 100%;
+    background-color: #000;
+    color: white;
+    margin-top: 100px;
+    padding-top: 50px;
+    border-top: 2px solid #8b0000;
+}
+.conteudo-rodape {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 40px;
+}
+.rodape-info,
+.rodape-contato,
+.rodape-links {
+    width: 30%;
+    text-align: center;
+}
+.rodape h2,
+.rodape h3 {
+    color: #000000;
+}
+.direitos {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #222;
+    color: #777;
+}
